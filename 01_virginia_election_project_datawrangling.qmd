@@ -18,6 +18,12 @@ library(httr)
 library(jsonlite)
 library(kableExtra)
 library(here)
+library(readxl) 
+library(scales)
+library(lubridate)
+library(ggthemes)
+library(ggplot2)
+library(esquisse)
 options(scipen = 999)
 options(stringsAsFactors = FALSE)
 
@@ -325,6 +331,19 @@ Where should we go from here....? Give it a shot...
 
 ```{r}
 
+joined_vacomparison <- joined_vacomparison %>% 
+  mutate(youngkin_overperform = biden_pct-pct_youngkin) 
+
+  
+
+```
+
+
+```{r}
+
+#save results to file for next step
+saveRDS(joined_vacomparison, here("processed_data", "joined_vacomparison.rds"))
+write_csv(joined_vacomparison, here("processed_data", "joined_vacomparison.csv"))
 
 
 ```
@@ -333,12 +352,8 @@ Where should we go from here....? Give it a shot...
 ```{r}
 
 
-
-```
-
-
-```{r}
-
+ggplot(joined_vacomparison, aes(x = reorder(locality, biden_pct), y = biden_pct)) +
+  geom_col(color = "#9ebcda", fill = "#9ebcda")
 
 
 ```
@@ -346,13 +361,15 @@ Where should we go from here....? Give it a shot...
 
 ```{r}
 
-
+ggplot(joined_vacomparison, aes(x = reorder(locality, biden_pct), y = biden_pct)) +
+  geom_col(color = "#9ebcda", fill = "#9ebcda")
 
 ```
 
 
 ```{r}
 
+# create a dataset
 
+# create a dataset
 
-```
